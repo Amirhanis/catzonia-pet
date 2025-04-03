@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Health App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <h1>Pet Health App</h1>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#pet-profile">Pet Profile</a>
+      <a href="#symptoms">Symptoms</a>
+      <a href="#consultation">Consultation</a>
+      <a href="#health-tips">Health Tips</a>
+    </div>
+  </nav>
+
+  <!-- Home Screen -->
+  <section id="home" class="screen home-screen">
+    <h2>Welcome to Pet Health App!</h2>
+    <p>Get instant veterinary advice and manage your pet's health.</p>
+    <button onclick="navigateTo('pet-profile')">Create Pet Profile</button>
+  </section>
+
+  <!-- Pet Profile Screen -->
+<section id="pet-profile" class="screen pet-profile-screen hidden">
+  <h2>Create or Select Pet Profile</h2>
+  <!-- Add this new div for saved pets -->
+  <div id="saved-pets" class="saved-pets">
+      <h3>Saved Pets</h3>
+      <div id="pets-list" class="pets-list">
+          <!-- Saved pets will be displayed here -->
+          <p id="no-pets-message">No pets added yet</p>
+      </div>
+  </div>
+  
+  <form id="pet-form">
+      <label for="pet-name">Pet Name:</label>
+      <input type="text" id="pet-name" placeholder="Enter pet name" required>
+      <label for="pet-type">Pet Type:</label>
+      <select id="pet-type" required>
+          <option value="" disabled selected>Select pet type</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="rabbit">Rabbit</option>
+          <option value="other">Other</option>
+      </select>
+      <button type="submit">Save Profile</button>
+  </form>
+</section>
+
+  <!-- Symptom Input Screen -->
+  <section id="symptoms" class="screen symptoms-screen hidden">
+    <h2>Describe Symptoms</h2>
+    <textarea id="symptom-input" placeholder="Describe your pet's symptoms..."></textarea>
+    <button onclick="consultAI()">Get Advice</button>
+  </section>
+
+  <!-- Vet AI Consultation Screen -->
+  <section id="consultation" class="screen consultation-screen hidden">
+    <h2>Vet AI Consultation</h2>
+    <div id="chatbox" class="chatbox">
+      <div class="message ai-message">Hello! Describe your pet's symptoms, and I'll provide advice.</div>
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+    <button onclick="sendMessage()">Send</button>
+  </section>
+
+  <!-- Treatment Recommendations/Follow-up Reminder Screen -->
+  <section id="treatment" class="screen treatment-screen hidden">
+    <h2>Treatment Recommendations</h2>
+    <ul id="recommendations-list"></ul>
+    <h3>Follow-up Reminder</h3>
+    <p id="reminder-message">Reminder: Follow up in 7 days.</p>
+    <button onclick="navigateTo('home')">Back to Home</button>
+  </section>
+
+  <!-- Optional Health Tips/Blogs Section -->
+<section id="health-tips" class="screen health-tips-screen hidden">
+  <h2>Health Tips & Blogs</h2>
+  <div class="tips-container">
+      <div class="tip-card">
+          <img src="images/exercise.jpg" alt="Pet Exercise" class="tip-image">
+          <h3>Regular Exercise</h3>
+          <p>Ensure regular exercise for your pet's physical and mental health.</p>
+          <button class="read-more" onclick="toggleBlog('exercise')">Read More</button>
+          <div id="exercise-blog" class="blog-content hidden">
+              <p>Daily exercise helps prevent obesity, maintains joint health, and reduces behavioral problems. 
+              For dogs, aim for 30-60 minutes of activity. Cats benefit from 10-15 minutes of play sessions.</p>
+          </div>
+      </div>
+
+      <div class="tip-card">
+          <img src="images/diet.jpg" alt="Pet Diet" class="tip-image">
+          <h3>Balanced Diet</h3>
+          <p>Maintain a nutritious and balanced diet for optimal health.</p>
+          <button class="read-more" onclick="toggleBlog('diet')">Read More</button>
+          <div id="diet-blog" class="blog-content hidden">
+              <p>A balanced diet should include proper portions of proteins, carbohydrates, and fats. 
+              Always provide fresh water and consult your vet for specific dietary needs.</p>
+          </div>
+      </div>
+
+      <div class="tip-card">
+          <img src="images/checkup.jpg" alt="Vet Checkup" class="tip-image">
+          <h3>Regular Checkups</h3>
+          <p>Schedule annual veterinary check-ups for prevention.</p>
+          <button class="read-more" onclick="toggleBlog('checkup')">Read More</button>
+          <div id="checkup-blog" class="blog-content hidden">
+              <p>Annual check-ups help detect health issues early. Keep vaccination records updated 
+              and discuss any behavioral changes with your vet.</p>
+          </div>
+      </div>
+  </div>
+</section>
+
+  <script src="script.js"></script>
+</body>
+</html>
